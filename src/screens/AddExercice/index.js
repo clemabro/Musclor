@@ -6,10 +6,22 @@ import styles from './styles.js';
 const AddExerciceScreen = (params) => {
     const navigation = useNavigation();
     const [exerciceToSave, setExerciceToSave] = useState("");
+
     const createExercice = () => {
-        console.warn(exerciceToSave);
+
+        db.transaction((tx) => {
+            tx.executeSql(
+              'INSERT INTO exercice (nom) VALUES (?)',
+              [exerciceToSave],
+              (tx, results) => {
+                    
+              }
+            );
+        });
+
         navigation.navigate("Exercices")
     }
+
 return(
     <View style={styles.container}>
         <Text style={styles.title}>Créer un exercice</Text>

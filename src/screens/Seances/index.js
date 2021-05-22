@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import SeanceInList from '../../components/SeanceInList';
 import styles from './styles';
-import feed from '../../../assets/data/feed';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Entypo from 'react-native-vector-icons/Entypo'
 import {useNavigation} from '@react-navigation/native';
@@ -87,8 +86,6 @@ const SeancesScreen = (params) => {
         });
       }, []);
 
-      useEffect(loadSeances, []);
-
       useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             loadSeances();
@@ -106,7 +103,7 @@ return(
         <FlatList
             style={styles.liste}
             data={seancesList}
-            renderItem={({item}) => <SeanceInList seance={item} />}
+            renderItem={({item, index}) => <SeanceInList seance={item} />}
         />
     </View>
 )};

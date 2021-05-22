@@ -7,7 +7,7 @@ const ExerciceInList = (params) => {
     const exo = params.exo;
     const navigation = useNavigation();
     const goToEditExercice = () => {
-        navigation.navigate('EditExercice', { exoId: exo.id });
+        navigation.navigate('EditExercice', { exoId: exo.exercice_id });
     }
 return (
     <Pressable style={styles.container} onPress={goToEditExercice}>

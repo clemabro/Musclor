@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, Text, TextInput, View } from 'react-native';
 import ExerciceInSeanceList from '../../components/ExerciceInSeanceList';
 import styles from './styles';
@@ -10,17 +10,21 @@ const EditSeanceScreen = (params) => {
 
     const [seanceToSave, setSeanceToSave] = useState("");
     const [exercices, setExercices] = useState([]);
+    const [seanceName, setSeanceName] = useState("");
 
-    db.transaction((tx) => {
-        tx.executeSql(
-          'SELECT * FROM seance where seance_id = ?',
-          [route.params.seanceId],
-          (tx, results) => {
-            setSeanceToSave(results.rows.item(0));
-          }
-        );
-    });
-
+    useEffect(() => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                'SELECT * FROM seance where seance_id = ?',
+                [route.params.seanceId],
+                (tx, results) => {
+                    setSeanceToSave(results.rows.item(0));
+                    setSeanceName(results.rows.item(0).nom)
+                }
+            );
+        });
+    }, []);
+    
     db.transaction((tx) => {
         tx.executeSql(
           'SELECT * FROM seance_exercice where seance_id = ?',
@@ -40,11 +44,30 @@ const EditSeanceScreen = (params) => {
     });
 
     const saveExercice = () => {
-        console.warn(seanceToSave);
+        seanceToSave.nom = seanceName;
+        db.transaction((tx) => {
+            tx.executeSql(
+              'UPDATE seance SET nom = ? WHERE seance_id = ?',
+              [seanceToSave.nom, seanceToSave.seance_id],
+              (tx, results) => {
+                    
+              }
+            );
+        });
         navigation.navigate("Seances")
     }
     
     const deleteExercice = () => {
+        db.transaction((tx) => {
+            tx.executeSql(
+              'DELETE FROM seance WHERE seance_id = ?',
+              [seanceToSave.seance_id],
+              (tx, results) => {
+                    
+              }
+            );
+        });
+
         navigation.navigate("Seances")
     }  
 return(
@@ -53,8 +76,8 @@ return(
         <TextInput
             style={styles.input}
             placeholder="Nom séance"
-            onChangeText={setSeanceToSave}
-            value={seanceToSave.nom}
+            onChangeText={setSeanceName}
+            value={seanceName}
         />
         <View style={styles.containerListe}>
             <FlatList 
