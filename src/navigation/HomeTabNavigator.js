@@ -32,7 +32,7 @@ const HomeTabNavigator = ({
             }}
         />
         <Tab.Screen 
-            name={"Séances passées"}
+            name={"SeancesPassees"}
             component={SeancePasseesScreen}
             options={{
                 tabBarIcon: ({color}) => (

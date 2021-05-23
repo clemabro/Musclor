@@ -10,14 +10,14 @@ const ExerciceInSeanceList = (params) => {
     const navigation = useNavigation();
     
     const goToEditExercice = () => {
-        navigation.navigate('EditSeanceExercice', {exo_id: exo.exo_id, seance_id: seance.seance_id, ordre: exo.ordre});
+        navigation.navigate('EditSeanceExercice', {exo_id: exo.exo_id, seance_id: seance.seance_id, ordre: exo.ordre, idSeanceExo: exo.id});
     }
 
     const deleteExercice = () => {
         db.transaction((tx) => {
             tx.executeSql(
-                'DELETE FROM seance_exercice where exo_id = ? and seance_id = ? and ordre = ?',
-                [exo.exo_id, seance.seance_id, exo.ordre],
+                'DELETE FROM seance_exercice where id = ?',
+                [exo.id],
                 (tx, results) => {
                 }
             );

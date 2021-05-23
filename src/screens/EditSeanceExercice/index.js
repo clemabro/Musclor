@@ -7,10 +7,6 @@ const EditSeanceExerciceScreen = (params) => {
     const route = useRoute();
     const navigation = useNavigation();
 
-    //const seance = feed.find(s => s.idS === route.params.seance_id);
-
-    //const exo = seance.exercices.find(exo => exo.idExo === route.params.exoId);
-
     const [exoNom, setExoNom] = useState("");
     const [repetitions, setRepetitions] = useState("");
     const [series, setSeries] = useState("");
@@ -21,8 +17,8 @@ const EditSeanceExerciceScreen = (params) => {
     useEffect(() => {
         db.transaction((tx) => {
             tx.executeSql(
-            'SELECT * FROM seance_exercice WHERE exo_id = ? and seance_id = ? and ordre = ?',
-            [route.params.exo_id, route.params.seance_id, route.params.ordre],
+            'SELECT * FROM seance_exercice WHERE id = ?',
+            [route.params.idSeanceExo],
             (tx, results) => {
                 setExoNom(results.rows.item(0).nomExo);
 
@@ -52,8 +48,8 @@ const EditSeanceExerciceScreen = (params) => {
             tx.executeSql(
                 'UPDATE seance_exercice ' + 
                 'SET ordre = ?, serie = ?, repetition = ?, poids = ? ' + 
-                'WHERE seance_id = ? and exo_id = ? and ordre = ?',
-                [ordre, series, repetitions, poids, route.params.seance_id, route.params.exo_id, route.params.ordre],
+                'WHERE id = ?',
+                [ordre, series, repetitions, poids, route.params.idSeanceExo],
                 (tx, results) => {
                     console.log('UPDATE seance_exercice', results.rowsAffected);
                     if (results.rowsAffected > 0) {
@@ -68,8 +64,8 @@ const EditSeanceExerciceScreen = (params) => {
 
         db.transaction((tx) => {
             tx.executeSql(
-                'DELETE FROM seance_exercice where exo_id = ? and seance_id = ? and ordre = ?',
-                [route.params.exo_id, route.params.seance_id, route.params.ordre],
+                'DELETE FROM seance_exercice where id = ?',
+                [route.params.idSeanceExo],
                 (tx, results) => {
                     if (results.rowsAffected > 0) {
                         navigation.goBack();

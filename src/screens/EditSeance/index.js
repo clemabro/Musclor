@@ -58,6 +58,13 @@ const EditSeanceScreen = (params) => {
     const deleteExercice = () => {
         db.transaction((tx) => {
             tx.executeSql(
+                'DELETE FROM seance_exercice WHERE seance_id = ?',
+                [seanceToSave.seance_id],
+                (tx, results) => {
+                      
+                }
+              );
+            tx.executeSql(
               'DELETE FROM seance WHERE seance_id = ?',
               [seanceToSave.seance_id],
               (tx, results) => {
@@ -80,6 +87,10 @@ const EditSeanceScreen = (params) => {
     
         return unsubscribe;
       }, [navigation])
+
+      const goToSeanceGo = () => {
+        navigation.navigate("SeanceGoScreen", {seance_id: seanceToSave.seance_id, ordre: 1})
+      }
 return(
     <View>
         <Pressable style={styles.button} onPress={navigateToAddExoInSeance}>
@@ -101,7 +112,7 @@ return(
         </View>
         
         <View style={styles.containerButton}>
-            <Pressable style={styles.buttonStart} onPress={deleteExercice}>
+            <Pressable style={styles.buttonStart} onPress={goToSeanceGo}>
                 <Text style={styles.buttonText}>Commencer</Text>
             </Pressable>
             <View style={{flexDirection: 'row'}}>

@@ -75,9 +75,47 @@ const SeancesScreen = (params) => {
                 txn.executeSql('DROP TABLE IF EXISTS seance_exercice', []);
                 txn.executeSql(
                   'CREATE TABLE IF NOT EXISTS seance_exercice' + 
-                  '(seance_id INTEGER, '+ 
+                  '(id INTEGER PRIMARY KEY AUTOINCREMENT, seance_id INTEGER, '+ 
                   'exo_id INTEGER, nomExo TEXT, ' +
-                  'ordre TEXT, serie TEXT, repetition TEXT, poids TEXT, PRIMARY KEY (seance_id, exo_id, ordre))',
+                  'ordre TEXT, serie TEXT, repetition TEXT, poids TEXT)',
+                  []
+                );
+              }
+            }
+          );
+        });
+      }, []);
+
+      useEffect(() => {
+        db.transaction(function (txn) {
+          txn.executeSql(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='seance_passe'",
+            [],
+            function (tx, res) {
+              console.warn('seance_passe:', res.rows.length);
+              if (res.rows.length == 0) {
+                txn.executeSql('DROP TABLE IF EXISTS seance_passe', []);
+                txn.executeSql(
+                  'CREATE TABLE IF NOT EXISTS seance_passe' + 
+                  '(id INTEGER PRIMARY KEY AUTOINCREMENT, seance_id INTEGER, date DATE)',
+                  []
+                );
+              }
+            }
+          );
+
+          txn.executeSql(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name='exo_seance_passe'",
+            [],
+            function (tx, res) {
+              console.warn('exo_seance_passe:', res.rows.length);
+              if (res.rows.length == 0) {
+                txn.executeSql('DROP TABLE IF EXISTS exo_seance_passe', []);
+                txn.executeSql(
+                  'CREATE TABLE IF NOT EXISTS exo_seance_passe' + 
+                  '(id INTEGER PRIMARY KEY AUTOINCREMENT, id_seance_passe INTEGER, '+ 
+                  'exo_id INTEGER, nomExo TEXT, ' +
+                  'serie TEXT, repetition TEXT, poids TEXT)',
                   []
                 );
               }

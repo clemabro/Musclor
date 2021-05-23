@@ -52,7 +52,7 @@ const AddExoInSeanceScreen = (params) => {
                 [selectedValue],
                 (tx, results) => {
                     tx.executeSql(
-                        'INSERT INTO seance_exercice VALUES (?,?,?,?,?,?,?)',
+                        'INSERT INTO seance_exercice (seance_id, exo_id, nomExo, ordre, serie, repetition, poids) VALUES (?,?,?,?,?,?,?)',
                         [seanceToSave.seance_id, selectedValue, results.rows.item(0).nom, ordre, series, repetitions, poids],
                         (tx, results) => {
                             console.log('INSERT INTO seance_exercice', results.rowsAffected);
