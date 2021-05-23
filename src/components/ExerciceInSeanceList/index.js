@@ -10,7 +10,7 @@ const ExerciceInSeanceList = (params) => {
     const navigation = useNavigation();
     
     const goToEditExercice = () => {
-        navigation.navigate('EditSeanceExercice', { param: {exoId: exo.exo_id, seanceId: seance.seance_id}});
+        navigation.navigate('EditSeanceExercice', {exo_id: exo.exo_id, seance_id: seance.seance_id, ordre: exo.ordre});
     }
 
     const deleteExercice = () => {

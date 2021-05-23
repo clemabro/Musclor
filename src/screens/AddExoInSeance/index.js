@@ -14,7 +14,6 @@ const AddExoInSeanceScreen = (params) => {
     const [ordre, setOrdre] = useState("");
     const [exercices, setExercices] = useState([]);
     const [selectedValue, setSelectedValue] = useState("");
-    const [exo, setExo] = useState("");
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -52,7 +51,6 @@ const AddExoInSeanceScreen = (params) => {
                 'SELECT * FROM exercice where exercice_id = ?',
                 [selectedValue],
                 (tx, results) => {
-                    console.log(poids)
                     tx.executeSql(
                         'INSERT INTO seance_exercice VALUES (?,?,?,?,?,?,?)',
                         [seanceToSave.seance_id, selectedValue, results.rows.item(0).nom, ordre, series, repetitions, poids],

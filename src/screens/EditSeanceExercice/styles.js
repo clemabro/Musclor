@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        margin: 25,
+        marginHorizontal: 25,
+        marginVertical: 10,
     },
     container: {
         marginTop: 25,
@@ -50,6 +51,19 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    label: {
+        marginHorizontal: 10,
+        marginTop: 20,
+        fontSize: 20,
+        width: (Dimensions.get('screen').width / 2) - 20,
+    },
+    input: {
+        marginHorizontal: 10,
+        fontSize: 20,
+        borderBottomWidth: 1,
+        borderColor: 'lightgrey',
+        width: (Dimensions.get('screen').width / 2) - 20,
     },
 });
 
