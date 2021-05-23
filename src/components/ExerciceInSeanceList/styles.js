@@ -9,8 +9,9 @@ const styles = StyleSheet.create({
     },
     seanceName: {
         marginVertical: 10,
-        fontSize: 18,
+        fontSize: 16,
         margin: 25,
+        width: "55%",
     },
     button: {
         alignItems: "flex-end",

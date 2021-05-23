@@ -104,12 +104,14 @@ return(
             <Pressable style={styles.buttonStart} onPress={deleteExercice}>
                 <Text style={styles.buttonText}>Commencer</Text>
             </Pressable>
-            <Pressable style={styles.buttonDelete} onPress={deleteExercice}>
-                <Text style={styles.buttonText}>Suppimer</Text>
-            </Pressable>
-            <Pressable style={styles.buttonSave} onPress={saveExercice}>
-                <Text style={styles.buttonText}>Sauvegarder</Text>
-            </Pressable>
+            <View style={{flexDirection: 'row'}}>
+                <Pressable style={styles.buttonDelete} onPress={deleteExercice}>
+                    <Text style={styles.buttonText}>Suppimer</Text>
+                </Pressable>
+                <Pressable style={styles.buttonSave} onPress={saveExercice}>
+                    <Text style={styles.buttonText}>Sauvegarder</Text>
+                </Pressable>
+            </View>
         </View>
     </View>
 )};

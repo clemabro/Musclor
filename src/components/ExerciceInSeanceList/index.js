@@ -8,7 +8,7 @@ const ExerciceInSeanceList = (params) => {
     const exo = params.exo;
     const seance = params.seance;
     const navigation = useNavigation();
-    console.log(exo)
+    
     const goToEditExercice = () => {
         navigation.navigate('EditSeanceExercice', { param: {exoId: exo.exo_id, seanceId: seance.seance_id}});
     }
@@ -16,8 +16,8 @@ const ExerciceInSeanceList = (params) => {
     const deleteExercice = () => {
         db.transaction((tx) => {
             tx.executeSql(
-                'DELETE FROM seance_exercice where exo_id = ? and seance_id = ?',
-                [exo.exo_id, seance.seance_id],
+                'DELETE FROM seance_exercice where exo_id = ? and seance_id = ? and ordre = ?',
+                [exo.exo_id, seance.seance_id, exo.ordre],
                 (tx, results) => {
                 }
             );
@@ -27,7 +27,7 @@ const ExerciceInSeanceList = (params) => {
     }
 return (
     <Pressable style={styles.container} onPress={goToEditExercice}>
-        <Text style={styles.seanceName}>{exo.nomExo} - {exo.serie}x{exo.repetition} - {exo.poids}kg</Text>
+        <Text style={styles.seanceName}>{exo.ordre} - {exo.nomExo} - {exo.serie}x{exo.repetition} - {exo.poids}kg</Text>
         <Pressable style={styles.button} onPress={deleteExercice}>
             <AntDesign name="delete" size={30} color="#FF0000" />
         </Pressable>

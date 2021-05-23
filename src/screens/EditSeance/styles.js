@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
     },
     containerButton: {
         width: Dimensions.get('screen').width - 20,
-        flexDirection: 'row',
-        top: 175,
     },
     buttonSave: {
         backgroundColor: '#1E90FF',
@@ -28,10 +26,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
         zIndex: 100,
         elevation: 3,
-        marginLeft: (Dimensions.get('screen').width / 2)
     },
     buttonDelete: {
         backgroundColor: 'red',
@@ -41,7 +37,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
         zIndex: 100,
         elevation: 3,
     },
@@ -54,7 +49,6 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
         zIndex: 100,
         elevation: 3,
     },

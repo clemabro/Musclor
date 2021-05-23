@@ -12,18 +12,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     label: {
-        marginHorizontal: 25,
+        marginHorizontal: 10,
         marginTop: 20,
         fontSize: 20,
+        width: (Dimensions.get('screen').width / 2) - 20,
     },
     inputContainer: {
         marginVertical: 20,
     },
     input: {
-        marginHorizontal: 25,
+        marginHorizontal: 10,
         fontSize: 20,
         borderBottomWidth: 1,
         borderColor: 'lightgrey',
+        width: (Dimensions.get('screen').width / 2) - 20,
     },
     picker: {
         marginHorizontal: 25,
@@ -37,8 +39,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'absolute',
-        top: 550,
         zIndex: 100,
         elevation: 3,
     },

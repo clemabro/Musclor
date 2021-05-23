@@ -1,8 +1,9 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Pressable, Text, TextInput, View, ScrollView } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import styles from './styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AddExoInSeanceScreen = (params) => {
     const route = useRoute();
@@ -45,12 +46,13 @@ const AddExoInSeanceScreen = (params) => {
     }, [exercices]);
 
     const ajouterExercice = () => {
+        
         db.transaction(function (tx) {
             tx.executeSql(
                 'SELECT * FROM exercice where exercice_id = ?',
                 [selectedValue],
                 (tx, results) => {
-                    console.log(results.rows.item(0).nom)
+                    console.log(poids)
                     tx.executeSql(
                         'INSERT INTO seance_exercice VALUES (?,?,?,?,?,?,?)',
                         [seanceToSave.seance_id, selectedValue, results.rows.item(0).nom, ordre, series, repetitions, poids],
@@ -84,23 +86,32 @@ return (
                     })
                 }
             </Picker>
-            <Text style={styles.label}>Series :</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Nb. Séries"
-                onChangeText={setSeries}
-                value={series}
-                keyboardType="numeric"
-            />
-            <Text style={styles.label}>Répétitions :</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Nb. Répétitions"
-                onChangeText={setRepetitions}
-                value={repetitions}
-                keyboardType="numeric"
-            />
-            <Text style={styles.label}>Poids :</Text>
+            <View style={{flexDirection:'row'}}>
+                <Text style={styles.label}>Series :</Text>
+                <Text style={styles.label}>Répétitions :</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Nb. Séries"
+                    onChangeText={setSeries}
+                    value={series}
+                    keyboardType="numeric"
+                />
+                
+                <TextInput
+                    style={styles.input}
+                    placeholder="Nb. Répétitions"
+                    onChangeText={setRepetitions}
+                    value={repetitions}
+                    keyboardType="numeric"
+                />
+            </View>
+            <View style={{flexDirection:'row'}}>
+                <Text style={styles.label}>Poids :</Text>
+                <Text style={styles.label}>Ordre :</Text>
+            </View>
+            <View style={{flexDirection:'row'}}>
             <TextInput
                 style={styles.input}
                 placeholder="Poids"
@@ -108,7 +119,7 @@ return (
                 value={poids}
                 keyboardType="numeric"
             />
-            <Text style={styles.label}>Ordre :</Text>
+            
             <TextInput
                 style={styles.input}
                 placeholder="Ordre"
@@ -116,10 +127,13 @@ return (
                 value={ordre}
                 keyboardType="numeric"
             />
-            <Pressable style={styles.button} onPress={ajouterExercice}>
-                <Text style={styles.buttonText}>Ajouter</Text>
-            </Pressable>
+            </View>
+            
         </View>
+        
+        <Pressable style={styles.button} onPress={ajouterExercice}>
+            <Text style={styles.buttonText}>Ajouter</Text>
+        </Pressable>
     </View>
 )};
 

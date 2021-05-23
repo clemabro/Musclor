@@ -77,7 +77,7 @@ const SeancesScreen = (params) => {
                   'CREATE TABLE IF NOT EXISTS seance_exercice' + 
                   '(seance_id INTEGER, '+ 
                   'exo_id INTEGER, nomExo TEXT, ' +
-                  'ordre TEXT, serie TEXT, repetition TEXT, poids TEXT, PRIMARY KEY (seance_id, exo_id))',
+                  'ordre TEXT, serie TEXT, repetition TEXT, poids TEXT, PRIMARY KEY (seance_id, exo_id, ordre))',
                   []
                 );
               }
