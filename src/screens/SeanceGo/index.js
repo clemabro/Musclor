@@ -96,6 +96,7 @@ const SeanceGoScreen = (params) => {
         setUntil(121)
         setIdCountdown(_uniqueId('prefix-'))
         setRunning(false);
+        alert("Fini")
     }
 
 return (
