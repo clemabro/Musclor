@@ -4,13 +4,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: "bold",
-        margin: 25,
+        marginHorizontal: 25,
     },
     container: {
         marginTop: 25,
     },
     input: {
-        margin: 25,
+        marginHorizontal: 25,
         fontSize: 20,
         borderBottomWidth: 1,
         borderColor: 'lightgrey',
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     containerButton: {
         width: Dimensions.get('screen').width - 20,
         flexDirection: 'row',
-        top: 100,
+        top: 175,
     },
     buttonSave: {
         backgroundColor: '#1E90FF',
@@ -66,6 +66,10 @@ const styles = StyleSheet.create({
     containerListe: {
         height: 250,
         margin: 25,
+    },
+    button: {
+        alignItems: "flex-end",
+        marginHorizontal: 25,
     },
 });
 

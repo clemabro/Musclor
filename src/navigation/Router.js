@@ -8,6 +8,7 @@ import AddExerciceScreen from '../screens/AddExercice';
 import EditExerciceScreen from '../screens/EditExercice';
 import EditSeanceScreen from '../screens/EditSeance';
 import EditSeanceExerciceScreen from '../screens/EditSeanceExercice';
+import AddExoInSeanceScreen from '../screens/AddExoInSeance';
 
 const Stack = createStackNavigator();
 
@@ -60,6 +61,14 @@ return (
             <Stack.Screen
                 name={"EditSeanceExercice"}
                 component={EditSeanceExerciceScreen}
+                options={{
+                    title: "",
+                }}
+            />
+
+            <Stack.Screen
+                name={"AddExoInSeance"}
+                component={AddExoInSeanceScreen}
                 options={{
                     title: "",
                 }}

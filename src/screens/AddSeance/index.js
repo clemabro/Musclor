@@ -13,7 +13,7 @@ const AddSeanceScreen = (params) => {
                 'INSERT INTO seance (nom) VALUES (?)',
                 [seanceToSave],
                 (tx, results) => {
-                    console.log('Results', results.rowsAffected);
+                    console.log('INSERT INTO seance', results.rowsAffected);
                     if (results.rowsAffected > 0) {
                         navigation.navigate("Seances")
                     } else alert('Save Failed');

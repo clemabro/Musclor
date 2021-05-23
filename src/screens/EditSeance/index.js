@@ -2,6 +2,7 @@ import { useNavigation, useRoute } from '@react-navigation/core';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, Text, TextInput, View } from 'react-native';
 import ExerciceInSeanceList from '../../components/ExerciceInSeanceList';
+import Entypo from 'react-native-vector-icons/Entypo'
 import styles from './styles';
 
 const EditSeanceScreen = (params) => {
@@ -25,24 +26,21 @@ const EditSeanceScreen = (params) => {
         });
     }, []);
     
-    db.transaction((tx) => {
-        tx.executeSql(
-          'SELECT * FROM seance_exercice where seance_id = ?',
-          [route.params.seanceId],
-          (tx, results) => {
-                var temp = [];
-                for (const seance_exo of results) {
-                    tx.executeSql(
-                        'SELECT * FROM exercice where exercice_id = ?', 
-                        seance_exo.exercice_id, (tx, results) => {
-                            temp.push(results.rows.item(0));
-                        })
+    loadSeanceExercice = () => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                'SELECT * FROM seance_exercice where seance_id = ? order by ordre',
+                [route.params.seanceId],
+                (tx, results) => {
+                    var temp = [];
+                    for (let i = 0; i < results.rows.length; ++i) {
+                        temp.push(results.rows.item(i));
+                    }
+                    setExercices(temp);
                 }
-                setExercices(temp);
-          }
-        );
-    });
-
+            );
+        });
+    }
     const saveExercice = () => {
         seanceToSave.nom = seanceName;
         db.transaction((tx) => {
@@ -69,9 +67,24 @@ const EditSeanceScreen = (params) => {
         });
 
         navigation.navigate("Seances")
-    }  
+    } 
+
+    const navigateToAddExoInSeance = () => {
+        navigation.navigate('AddExoInSeance', {seance_id: seanceToSave.seance_id, loadSeanceExercice: loadSeanceExercice})
+    };
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            loadSeanceExercice();
+        });
+    
+        return unsubscribe;
+      }, [navigation])
 return(
     <View>
+        <Pressable style={styles.button} onPress={navigateToAddExoInSeance}>
+            <Entypo name="add-to-list" size={35} color="#1E90FF" />
+        </Pressable>
         <Text style={styles.title}>{seanceToSave.nom}</Text>
         <TextInput
             style={styles.input}
@@ -83,7 +96,7 @@ return(
             <FlatList 
                 style={styles.liste}
                 data={exercices}
-                renderItem={({item}) => <ExerciceInSeanceList exo={item} seance={seanceToSave} />}
+                renderItem={({item}) => <ExerciceInSeanceList exo={item} seance={seanceToSave} loadSeanceExercice={loadSeanceExercice}/>}
             />
         </View>
         

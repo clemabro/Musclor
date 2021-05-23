@@ -32,7 +32,7 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='seance'",
             [],
             function (tx, res) {
-              console.warn('item:', res.rows.length);
+              console.warn('seance:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS seance', []);
                 txn.executeSql(
@@ -51,7 +51,7 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='exercice'",
             [],
             function (tx, res) {
-              console.warn('item:', res.rows.length);
+              console.warn('exercice:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS exercice', []);
                 txn.executeSql(
@@ -70,14 +70,14 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='seance_exercice'",
             [],
             function (tx, res) {
-              console.warn('item:', res.rows.length);
+              console.warn('seance_exercice:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS seance_exercice', []);
                 txn.executeSql(
                   'CREATE TABLE IF NOT EXISTS seance_exercice' + 
-                  '(seance_id INTEGER PRIMARY KEY, '+ 
-                  'exo_id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
-                  'nom TEXT, serie TEXT, repetition TEXT, poids TEXT)',
+                  '(seance_id INTEGER, '+ 
+                  'exo_id INTEGER, nomExo TEXT, ' +
+                  'ordre TEXT, serie TEXT, repetition TEXT, poids TEXT, PRIMARY KEY (seance_id, exo_id))',
                   []
                 );
               }
