@@ -42,10 +42,9 @@ const AddExoInSeanceScreen = (params) => {
             }
             );
         });
-    }, [exercices]);
+    }, []);
 
     const ajouterExercice = () => {
-        
         db.transaction(function (tx) {
             tx.executeSql(
                 'SELECT * FROM exercice where exercice_id = ?',
@@ -61,7 +60,6 @@ const AddExoInSeanceScreen = (params) => {
                             } else alert('Save Failed');
                         }
                     );
-
                 }
             );
         });

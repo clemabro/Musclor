@@ -35,6 +35,7 @@ return(
             style={styles.liste}
             data={exercices}
             renderItem={({item}) => <ExerciceInList exo={item} />}
+            keyExtractor={(item, index) => index.toString()}
         />
     </View>
 )};

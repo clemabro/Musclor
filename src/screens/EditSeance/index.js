@@ -26,7 +26,7 @@ const EditSeanceScreen = (params) => {
         });
     }, []);
     
-    loadSeanceExercice = () => {
+    const loadSeanceExercice = () => {
         db.transaction((tx) => {
             tx.executeSql(
                 'SELECT * FROM seance_exercice where seance_id = ? order by ordre',
@@ -77,7 +77,7 @@ const EditSeanceScreen = (params) => {
     } 
 
     const navigateToAddExoInSeance = () => {
-        navigation.navigate('AddExoInSeance', {seance_id: seanceToSave.seance_id, loadSeanceExercice: loadSeanceExercice})
+        navigation.navigate('AddExoInSeance', {seance_id: seanceToSave.seance_id})
     };
 
     useEffect(() => {
@@ -108,6 +108,7 @@ return(
                 style={styles.liste}
                 data={exercices}
                 renderItem={({item}) => <ExerciceInSeanceList exo={item} seance={seanceToSave} loadSeanceExercice={loadSeanceExercice}/>}
+                keyExtractor={(item, index) => index.toString()}
             />
         </View>
         

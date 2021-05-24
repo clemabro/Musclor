@@ -142,6 +142,7 @@ return(
             style={styles.liste}
             data={seancesList}
             renderItem={({item, index}) => <SeanceInList seance={item} />}
+            keyExtractor={(item, index) => index.toString()}
         />
     </View>
 )};

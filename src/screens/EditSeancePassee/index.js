@@ -50,6 +50,7 @@ return(
                 style={styles.liste}
                 data={exercices}
                 renderItem={({item}) => <ExercicePasseeInSeancePasseeList exo={item} seance={seance} />}
+                keyExtractor={(item, index) => index.toString()}
             />
         </View>
     </View>
