@@ -63,7 +63,26 @@ const EditSeanceScreen = (params) => {
                 (tx, results) => {
                       
                 }
-              );
+            );
+            tx.executeSql(
+                'SELECT * FROM seance_passe WHERE seance_id = ?',
+                [seanceToSave.seance_id],
+                (tx, results) => {
+                    tx.executeSql(
+                        'DELETE FROM exo_seance_passe WHERE id_seance_passe = ?',
+                        [results.rows.item(0).id],
+                        (tx, results) => {
+                            tx.executeSql(
+                                'DELETE FROM seance_passe WHERE seance_id = ?',
+                                [seanceToSave.seance_id],
+                                (tx, results) => {
+                                      
+                                }
+                            );
+                        }
+                    );
+                }
+            );
             tx.executeSql(
               'DELETE FROM seance WHERE seance_id = ?',
               [seanceToSave.seance_id],

@@ -146,6 +146,7 @@ return (
     <View>
         <Text style={styles.seanceName}>{seance.nom}</Text>
         <Text style={styles.exoName}>{exo.nomExo}</Text>
+        <Text style={styles.exoName}>Objectif : {exo.serie}x{exo.repetition} - {exo.poids} kg</Text>
         <View style={{flexDirection:'row'}}>
             <Text style={styles.label}>Series :</Text>
             <Text style={styles.label}>Répétitions :</Text>
