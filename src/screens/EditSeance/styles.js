@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     },
     containerListe: {
         height: 250,
-        margin: 25,
+        marginHorizontal: 10,
+        marginVertical: 20,
     },
     button: {
         alignItems: "flex-end",
