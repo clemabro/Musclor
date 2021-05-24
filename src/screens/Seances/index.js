@@ -32,7 +32,7 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='seance'",
             [],
             function (tx, res) {
-              console.warn('seance:', res.rows.length);
+              console.log('seance:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS seance', []);
                 txn.executeSql(
@@ -51,7 +51,7 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='exercice'",
             [],
             function (tx, res) {
-              console.warn('exercice:', res.rows.length);
+              console.log('exercice:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS exercice', []);
                 txn.executeSql(
@@ -70,7 +70,7 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='seance_exercice'",
             [],
             function (tx, res) {
-              console.warn('seance_exercice:', res.rows.length);
+              console.log('seance_exercice:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS seance_exercice', []);
                 txn.executeSql(
@@ -92,7 +92,7 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='seance_passe'",
             [],
             function (tx, res) {
-              console.warn('seance_passe:', res.rows.length);
+              console.log('seance_passe:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS seance_passe', []);
                 txn.executeSql(
@@ -108,7 +108,7 @@ const SeancesScreen = (params) => {
             "SELECT name FROM sqlite_master WHERE type='table' AND name='exo_seance_passe'",
             [],
             function (tx, res) {
-              console.warn('exo_seance_passe:', res.rows.length);
+              console.log('exo_seance_passe:', res.rows.length);
               if (res.rows.length == 0) {
                 txn.executeSql('DROP TABLE IF EXISTS exo_seance_passe', []);
                 txn.executeSql(
