@@ -19,9 +19,18 @@ const SeanceGoScreen = (params) => {
     const [serie, setSerie] = useState("");
     const [repetition, setRepetition] = useState("");
     const [poids, setPoids] = useState("");
-    const [running, setRunning] = useState(false);
-    const [until, setUntil] = useState(120);
-    const [idCountdown, setIdCountdown] = useState("");
+
+    const [runningDeuxMin, setRunningDeuxMin] = useState(false);
+    const [untilDeuxMin, setUntilDeuxMin] = useState(120);
+    const [idCountdownDeuxMin, setIdCountdownDeuxMin] = useState("");
+
+    const [runningTroisMin, setRunningTroisMin] = useState(false);
+    const [untilTroisMin, setUntilTroisMin] = useState(180);
+    const [idCountdownTroisMin, setIdCountdownTroisMin] = useState("");
+
+    const [runningCinqMin, setRunningCinqMin] = useState(false);
+    const [untilCinqMin, setUntilCinqMin] = useState(300);
+    const [idCountdownCinqMin, setIdCountdownCinqMin] = useState("");
     
     useEffect(() => {
         db.transaction((tx) => {
@@ -82,21 +91,55 @@ const SeanceGoScreen = (params) => {
         });
     }
 
-    const countdown = () => {
-        if(running) {
-            setUntil(121)
-            setIdCountdown(_uniqueId('prefix-'))
-            setRunning(false);
+    const countdownDeuxMin = () => {
+        if(runningDeuxMin) {
+            setUntilDeuxMin(121)
+            setIdCountdownDeuxMin(_uniqueId('prefix-'))
+            setRunningDeuxMin(false);
         } else {
-            setRunning(true);
+            setRunningDeuxMin(true);
         }
     }
 
-    const countdownFinished = () => {
-        setUntil(121)
-        setIdCountdown(_uniqueId('prefix-'))
-        setRunning(false);
-        alert("Fini")
+    const countdownFinishedDeuxMin = () => {
+        setUntilDeuxMin(121)
+        setIdCountdownDeuxMin(_uniqueId('prefix-'))
+        setRunningDeuxMin(false);
+        alert("Fini");
+    }
+
+    const countdownTroisMin = () => {
+        if(runningTroisMin) {
+            setUntilTroisMin(181)
+            setIdCountdownTroisMin(_uniqueId('prefix-'))
+            setRunningTroisMin(false);
+        } else {
+            setRunningTroisMin(true);
+        }
+    }
+
+    const countdownFinishedTroisMin = () => {
+        setUntilTroisMin(181)
+        setIdCountdownTroisMin(_uniqueId('prefix-'))
+        setRunningTroisMin(false);
+        alert("Fini");
+    }
+
+    const countdownCinqMin = () => {
+        if(runningCinqMin) {
+            setUntilCinqMin(301)
+            setIdCountdownCinqMin(_uniqueId('prefix-'))
+            setRunningCinqMin(false);
+        } else {
+            setRunningCinqMin(true);
+        }
+    }
+
+    const countdownFinishedCinqMin = () => {
+        setUntilCinqMin(301)
+        setIdCountdownCinqMin(_uniqueId('prefix-'))
+        setRunningCinqMin(false);
+        alert("Fini");
     }
 
 return (
@@ -136,21 +179,56 @@ return (
             keyboardType="numeric"
         />
         </View>
-        <CountDown
-            id={idCountdown}
-            size={20}
-            until={until}
-            onFinish={countdownFinished}
-            digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1E90FF'}}
-            digitTxtStyle={{color: '#1E90FF'}}
-            timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
-            separatorStyle={{color: '#1E90FF'}}
-            timeToShow={['M', 'S']}
-            timeLabels={{m: null, s: null}}
-            showSeparator
-            running={running}
-            onPress={countdown}
-        />
+        <View style={{flexDirection:'row', justifyContent: 'center'}}>
+            <CountDown
+                id={idCountdownDeuxMin}
+                size={20}
+                until={untilDeuxMin}
+                onFinish={countdownFinishedDeuxMin}
+                digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1E90FF'}}
+                digitTxtStyle={{color: '#1E90FF'}}
+                timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
+                separatorStyle={{color: '#1E90FF'}}
+                timeToShow={['M', 'S']}
+                timeLabels={{m: null, s: null}}
+                showSeparator
+                running={runningDeuxMin}
+                onPress={countdownDeuxMin}
+                style={{marginHorizontal:10, marginVertical:25}}
+            />
+            <CountDown
+                id={idCountdownTroisMin}
+                size={20}
+                until={untilTroisMin}
+                onFinish={countdownFinishedTroisMin}
+                digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1E90FF'}}
+                digitTxtStyle={{color: '#1E90FF'}}
+                timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
+                separatorStyle={{color: '#1E90FF'}}
+                timeToShow={['M', 'S']}
+                timeLabels={{m: null, s: null}}
+                showSeparator
+                running={runningTroisMin}
+                onPress={countdownTroisMin}
+                style={{marginHorizontal:10, marginVertical:25}}
+            />
+            <CountDown
+                id={idCountdownCinqMin}
+                size={20}
+                until={untilCinqMin}
+                onFinish={countdownFinishedCinqMin}
+                digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: '#1E90FF'}}
+                digitTxtStyle={{color: '#1E90FF'}}
+                timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
+                separatorStyle={{color: '#1E90FF'}}
+                timeToShow={['M', 'S']}
+                timeLabels={{m: null, s: null}}
+                showSeparator
+                running={runningCinqMin}
+                onPress={countdownCinqMin}
+                style={{marginHorizontal:10, marginVertical:25}}
+            />
+        </View>
         <Pressable onPress={nextExo} style={styles.button}>
             <Text style={styles.buttonText}>{buttonName}</Text>
         </Pressable>
